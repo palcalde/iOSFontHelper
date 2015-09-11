@@ -42,9 +42,9 @@ class FontHelper
 	end
 
 	def createImplementationFile()
-		sample = File.open(File.dirname(__FILE__) + '/' + "sample.m")
+		template = File.open(File.dirname(__FILE__) + '/' + "template.m")
 		newFile = File.new(saveDirectory + '/' + "NSString+#{@fontName}.m", 'w');
-		sample.each do |line|
+		template.each do |line|
 			line = self.replaceFontNameForLine(line)
 			if line.include? '<<UNICODES_ARRAY>>'
 				line = line.sub('<<UNICODES_ARRAY>>', self.unicodesArray() + "\n")
@@ -70,9 +70,9 @@ class FontHelper
 	end
 
 	def createHeaderFile()
-		sample = File.open(File.dirname(__FILE__) + '/' +  "sample.h")
+		template = File.open(File.dirname(__FILE__) + '/' +  "template.h")
 		newFile = File.new(saveDirectory + '/' + "NSString+#{@fontName}.h", 'w');
-		sample.each do |line|
+		template.each do |line|
 			line = self.replaceFontNameForLine(line)
 			if line.include? '<<UNICODES_ENUM>>'
 				line = line.sub('<<UNICODES_ENUM>>', self.unicodesEnums() + "\n")
