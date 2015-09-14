@@ -22,7 +22,7 @@ class FontHelperSwift
 		@saveDirectory = saveDirectory
 		@unicodes = `otfinfo -u #{ttfPath}`.split("\n")
 		@fontName = `otfinfo --info #{ttfPath}`.split[1]
-		puts "\nFontName is #{@fontName} \n"
+		puts "\nFont name: #{@fontName} \n"
 	end
 
 	def unicodesArray()
