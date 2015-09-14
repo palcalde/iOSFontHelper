@@ -15,7 +15,7 @@
  # CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  # IN THE SOFTWARE.
  
-class FontHelperObjectiveC
+class FontHelper
 	attr_accessor :unicodes, :fontName, :saveDirectory
 
 	def initialize (ttfPath, saveDirectory)
@@ -123,7 +123,7 @@ if ARGV[0] && File.file?(ARGV[0]) then ttfPath = ARGV[0] end
 if ARGV[1] && File.directory?(ARGV[1]) then saveDirectory = ARGV[1].chomp("/") end
 
 if ttfPath && saveDirectory
-	fontHelper =  FontHelperObjectiveC.new(ttfPath, saveDirectory)
+	fontHelper =  FontHelper.new(ttfPath, saveDirectory)
 	fontHelper.createHeaderFile
 	fontHelper.createImplementationFile
 else 

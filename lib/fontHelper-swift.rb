@@ -14,8 +14,8 @@
  # THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
  # CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  # IN THE SOFTWARE.
- 
-class FontHelperObjectiveC
+
+class FontHelperSwift
 	attr_accessor :unicodes, :fontName, :saveDirectory
 
 	def initialize (ttfPath, saveDirectory)
@@ -26,28 +26,30 @@ class FontHelperObjectiveC
 	end
 
 	def unicodesArray()
-		unicodesStringArray = "@["
+		unicodesStringArray = "["
 		@unicodes.each_with_index do |unicode, index|
 			unicodeSplitted = unicode.split(" ")
 			if !self.isValidUnicodeCharacter(unicodeSplitted[0]) then next end
 			if unicodeSplitted.length == 3
 				unicodeValue = unicodeSplitted[0]
-				unicodeValue = unicodeValue.sub('uni', 'u')
-				unicodesStringArray += '@"\\' + unicodeValue + '"'
+				unicodeValue = unicodeValue.sub('uni', '')
+				unicodesStringArray += '"\\u' + '{' + unicodeValue + '}' + '"'
 				if index < @unicodes.length-1 then unicodesStringArray += ',' end
 			end
 		end
-		unicodesStringArray += '];'
+		unicodesStringArray += ']'
 		return unicodesStringArray
 	end
 
 	def createImplementationFile()
-		template = File.open(File.dirname(__FILE__) + '/' + "template.m")
-		newFile = File.new(saveDirectory + '/' + "NSString+#{@fontName}.m", 'w');
+		template = File.open(File.dirname(__FILE__) + '/' + "template.swift")
+		newFile = File.new(saveDirectory + '/' + "NSString+#{@fontName}.swift", 'w');
 		template.each do |line|
 			line = self.replaceFontNameForLine(line)
 			if line.include? '<<UNICODES_ARRAY>>'
 				line = line.sub('<<UNICODES_ARRAY>>', self.unicodesArray() + "\n")
+			elsif line.include? '<<UNICODES_ENUM>>'
+				line = line.sub('<<UNICODES_ENUM>>', self.unicodesEnums() + "\n")
 			end
 			newFile.write(line)
 		end
@@ -62,25 +64,11 @@ class FontHelperObjectiveC
 			if !self.isValidUnicodeCharacter(unicodeSplitted[0]) then next end
 			if unicodeSplitted.length == 3
 				unicodeName = unicodeSplitted[2]
-				unicodesString += '    ' + @fontName + '_' + unicodeName
-				if index < @unicodes.length-1 then unicodesString += ',' + "\n" end
+				unicodesString += '    ' + 'case ' + @fontName + '_' + unicodeName
+				if index < @unicodes.length-1 then unicodesString += "\n" end
 			end
 		end
 		return unicodesString
-	end
-
-	def createHeaderFile()
-		template = File.open(File.dirname(__FILE__) + '/' +  "template.h")
-		newFile = File.new(saveDirectory + '/' + "NSString+#{@fontName}.h", 'w');
-		template.each do |line|
-			line = self.replaceFontNameForLine(line)
-			if line.include? '<<UNICODES_ENUM>>'
-				line = line.sub('<<UNICODES_ENUM>>', self.unicodesEnums() + "\n")
-			end
-		newFile.write(line)
-		end
-		puts "\nCreated header file: \n"
-		puts newFile.path + "\n\n"
 	end
 
 	def replaceFontNameForLine(line)
@@ -123,8 +111,7 @@ if ARGV[0] && File.file?(ARGV[0]) then ttfPath = ARGV[0] end
 if ARGV[1] && File.directory?(ARGV[1]) then saveDirectory = ARGV[1].chomp("/") end
 
 if ttfPath && saveDirectory
-	fontHelper =  FontHelperObjectiveC.new(ttfPath, saveDirectory)
-	fontHelper.createHeaderFile
+	fontHelper =  FontHelperSwift.new(ttfPath, saveDirectory)
 	fontHelper.createImplementationFile
 else 
 	if ttfPath.nil?
