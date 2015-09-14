@@ -42,7 +42,7 @@ label.font = UIFont(name: "FontAwesome", size: 20.0)
 label.text = String.FontAwesomeIconStringForEnum(String.FontAwesome.FontAwesome_facebook_sign)
 ```
 
-That's it.
+That's it. Note that the font name we use with UIFont is the specified by the script ```FontName = FontAwesome```.
 
 ## I've never imported a custom font in iOS. How do I do it?
 &bull; Drag the .ttf file into your project. Make sure 'Copy Items if needed' and the target box of your app are both clicked.
@@ -50,9 +50,8 @@ That's it.
 &bull; Open your Info.plist and add "Fonts provided by application" key into your plist and in Item 0 copy the exact filename of the font you copied to your Supporting files WITH extension. For example: "myIconsFont.ttf".
 
 &bull; When loading fonts in iOS, use the font name that the script printed:
-```In the example above FontName = FontAwesome``` 
-<b>not the .ttf name.</b>
 
+```FontName = FontAwesome``` 
 
 
 If you have troubles importing the font: http://codewithchris.com/common-mistakes-with-adding-custom-fonts-to-your-ios-app/
