@@ -18,7 +18,7 @@ ruby iOSFontHelper-master/fontHelper-swift.rb FontAwesome.ttf .
 This generates a NSString category at the specified path:
 
 ```
-Font name: FontAwesome 
+FontName = FontAwesome 
 
 Created header file: 
 ./NSString+FontAwesome.h
@@ -50,7 +50,7 @@ That's it.
 &bull; Open your Info.plist and add "Fonts provided by application" key into your plist and in Item 0 copy the exact filename of the font you copied to your Supporting files WITH extension. For example: "myIconsFont.ttf".
 
 &bull; When loading fonts in iOS, use the font name that the script printed:
-```In the example above 'Font name: FontAwesome'``` 
+```In the example above FontName = FontAwesome``` 
 <b>not the .ttf name.</b>
 
 
