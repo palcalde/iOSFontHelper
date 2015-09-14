@@ -13,5 +13,15 @@ And even worst, every time you update your font with a new icon, you'll also hav
 ## Ok, what's this script then doing?
 You pass the script your .ttf font and it creates the NSString Category for you automatically. Every time you change your font, you can just import it into your project and run the script to generate the category again. You are done. 
 
+## How do I use it?
+Every Mac comes with a Ruby installed. All you have to do is call the ruby virtual machine to execute the script, passing it the path to your .ttf file as first parameter, and the path where the generated NSString Category will be saved. 
+
+Sample: 
+
+```ruby
+ruby iosFontHelper/fontHelper.rb FontAwesome.ttf .
+```
+
+
 
 
