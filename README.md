@@ -55,5 +55,7 @@ That's it.
 
 
 
+If you have troubles importing the font: http://codewithchris.com/common-mistakes-with-adding-custom-fonts-to-your-ios-app/
+
 
 
