@@ -1,26 +1,58 @@
 ## What's this?
-A Ruby script to help you handle custom .ttf fonts in iOS.   
-
-iOS doesn't support vectors natively in UILabels, UIImage, UIButton etc. forcing users to put all their icons as .png or .jpg, with different sizes for each device. I like to have all my app icons as vectors instead of .png files, so I can resize them as I want for each device, and change the color of the icon easily. 
-
-FontAwesome is a great example (https://github.com/FortAwesome/Font-Awesome). You can import the font as .ttf in your iOS project and use this category to map the icons provided with an Enum value: https://github.com/alexdrone/ios-fontawesome.
-
-## So what's the problem with custom .ttf fonts?
-Well, if you want to create your own .ttf font a set of icons for your app you'll have to create your NSString Category to map each character with an Enum value. If you see the code of the fontAwesome one (https://github.com/alexdrone/ios-fontawesome), it would take some time. 
-
-And even worst, every time you update your font with a new icon, you'll also have to update your enum.
-
-## Ok, what's this script then doing?
-You pass the script your .ttf font and it creates the NSString Category for you automatically. Every time you change your font, you can just import it into your project and run the script to generate the category again. You are done. 
+A Ruby script to help you handle custom .ttf fonts in iOS. It autogenerates all the code to map your .ttf characters into an Enum either in Swift or Objective-C code. Its great because you can change your font as you want, adding and removing icons, and this script will do the hard job mapping them into actual code.  
 
 ## How do I use it?
-Every Mac comes with a Ruby installed. All you have to do is call the ruby virtual machine to execute the script, passing it the path to your .ttf file as first parameter, and the path where the generated NSString Category will be saved. 
+Every Mac comes with a Ruby installed. All you have to do is call the ruby script from the terminal passing it the path to your .ttf file as first parameter, and the path where the generated code will be saved. 
 
-Sample: 
+Sample to generate Objective-C code: 
 
 ```ruby
-ruby iosFontHelper/fontHelper.rb FontAwesome.ttf .
+ruby iosFontHelper/fontHelper-objectivec.rb FontAwesome.ttf .
 ```
+
+Sample to generate Swift code: 
+
+```ruby
+ruby iosFontHelper/fontHelper-swift.rb FontAwesome.ttf .
+```
+This generates a NSString category at the specified path:
+
+```
+FontName is FontAwesome 
+
+Created header file: 
+./NSString+FontAwesome.h
+
+
+Created implementation file:
+./NSString+FontAwesome.m
+```
+
+You can now drag the generated files into your project and start using them like:
+
+Objective-C:
+```
+label.font = [UIFont fontWithName:@"FontAwesome" size:20.f];
+label.text = [NSString FontAwesomeCharacterStringForEnum:FontAwesome_apple];
+```
+
+Swift:
+```
+label.font = UIFont(name: "FontAwesome", size: 20.0)
+label.text = String.FontAwesomeIconStringForEnum(String.FontAwesome.FontAwesome_facebook_sign)
+```
+
+That's it.
+
+## I've never imported a custom font in iOS. How do I do it?
+&bull; Drag the .ttf file into your project. Make sure 'Copy Items if needed' and the target box of your app are both clicked.
+
+&bull; Open your Info.plist and add "Fonts provided by application" key into your plist and in Item 0 copy the exact filename of the font you copied to your Supporting files WITH extension. For example: "myIconsFont.ttf".
+
+&bull; When loading fonts in iOS, use the font name that the script printed:
+```In the example above 'FontName is FontAwesome'``` 
+<b>not the .ttf name.</b>
+
 
 
 
