@@ -7,18 +7,18 @@ Every Mac comes with a Ruby installed. All you have to do is call the ruby scrip
 Sample to generate Objective-C code: 
 
 ```ruby
-ruby iosFontHelper/fontHelper-objectivec.rb FontAwesome.ttf .
+ruby iOSFontHelper-master/fontHelper-objectivec.rb FontAwesome.ttf .
 ```
 
 Sample to generate Swift code: 
 
 ```ruby
-ruby iosFontHelper/fontHelper-swift.rb FontAwesome.ttf .
+ruby iOSFontHelper-master/fontHelper-swift.rb FontAwesome.ttf .
 ```
 This generates a NSString category at the specified path:
 
 ```
-FontName is FontAwesome 
+Font name: FontAwesome 
 
 Created header file: 
 ./NSString+FontAwesome.h
@@ -50,7 +50,7 @@ That's it.
 &bull; Open your Info.plist and add "Fonts provided by application" key into your plist and in Item 0 copy the exact filename of the font you copied to your Supporting files WITH extension. For example: "myIconsFont.ttf".
 
 &bull; When loading fonts in iOS, use the font name that the script printed:
-```In the example above 'FontName is FontAwesome'``` 
+```In the example above 'Font name: FontAwesome'``` 
 <b>not the .ttf name.</b>
 
 
