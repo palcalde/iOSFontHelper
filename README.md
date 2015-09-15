@@ -2,9 +2,9 @@
 A Ruby script to help you handle custom .ttf fonts in iOS. It autogenerates all the code to map your .ttf characters into an Enum either in Swift or Objective-C code. Its great because you can change your font as you want, adding and removing icons, and this script will do the hard job mapping them into actual code.  
 
 ## How do I use it?
-<b>You need to have homebrew installed</b> (The script makes use of the library otfinfo which comes in brew package lcdf-typetools) 
+<b>You need to have homebrew installed</b>
 
-Once homebrew is installed, call the ruby script from the terminal passing it the path to your .ttf file as first parameter, and the path where the generated code will be saved. 
+Then, call the ruby script from the terminal passing it the path to your .ttf file as first parameter, and the path where the generated code will be saved. (If the script does not detect the package lcd-typetools installed, it will try to do it via homebrew).
 
 Sample to generate Objective-C code: 
 
