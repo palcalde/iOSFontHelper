@@ -1,7 +1,9 @@
 ## What's this?
 A Ruby script to help you handle custom .ttf fonts in iOS. It autogenerates all the code to map your .ttf characters into an Enum either in Swift or Objective-C code. 
 
-Its great because with this you can use any icon of the many available .ttf fonts out there in your app (like https://fortawesome.github.io/Font-Awesome/). You just have to import the .ttf file in your iOS project and this script will do the hard job mapping them into actual code.
+It's great because with this you can use any icon of the many available .ttf fonts out there in your app (like https://fortawesome.github.io/Font-Awesome/). You just have to import the .ttf file in your iOS project and this script will do the hard job mapping them into actual code.
+
+It can be even more powerful if you put all your app icons in a font.ttf and use the script to map it in code. You will then have all your icons vectorized!. You can put them in UILabels, UIButtons etc.. not having to worry about the device size at all. They scale nicely for every device. You can also change the textColor and see how the icons look without having to get a new .png
 
 ## How do I use it?
 <b>You need to have homebrew installed</b>
