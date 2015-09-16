@@ -1,18 +1,26 @@
 ## What's this?
-A Ruby script to help you handle custom .ttf fonts in iOS. It autogenerates all the code to map your .ttf characters into an Enum either in Swift or Objective-C code. Its great because you can change your font as you want, adding and removing icons, and this script will do the hard job mapping them into actual code.  
+A Ruby script to help you handle custom .ttf fonts in iOS. It autogenerates all the code to map your .ttf characters into an Enum either in Swift or Objective-C code. 
+
+Its great because with this you can use any icon of the many available .ttf fonts out there in your app (like https://fortawesome.github.io/Font-Awesome/). You just have to import the .ttf file in your iOS project and this script will do the hard job mapping them into actual code.
 
 ## How do I use it?
 <b>You need to have homebrew installed</b>
 
 Then, call the ruby script from the terminal passing it the path to your .ttf file as first parameter, and the path where the generated code will be saved. (If the script does not detect the package lcd-typetools installed, it will try to do it via homebrew).
 
-Sample to generate Objective-C code: 
+Sample:
+
+Let's say you download FontAwesome.ttf from https://fortawesome.github.io/Font-Awesome/ and you want to use it in your app. You import it in your project and:
+
+to generate Objective-C code: 
+
+
 
 ```ruby
 ruby iOSFontHelper-master/fontHelper-objectivec.rb FontAwesome.ttf .
 ```
 
-Sample to generate Swift code: 
+to generate Swift code: 
 
 ```ruby
 ruby iOSFontHelper-master/fontHelper-swift.rb FontAwesome.ttf .
@@ -57,6 +65,3 @@ That's it. Note that the font name we use with UIFont is the specified by the sc
 
 
 If you have troubles importing the font: http://codewithchris.com/common-mistakes-with-adding-custom-fonts-to-your-ios-app/
-
-
-
