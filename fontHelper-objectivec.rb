@@ -21,8 +21,9 @@ class FontHelper
 	def initialize (ttfPath, saveDirectory)
 		@saveDirectory = saveDirectory
 		@unicodes = `otfinfo -u #{ttfPath}`.split("\n")
+		puts @unicodes
 		@fontName = `otfinfo --info #{ttfPath}`.split[1]
-		puts "\nFont name: #{@fontName} \n"
+		puts "\nFontName = #{@fontName} \n"
 	end
 
 	def unicodesArray()
@@ -30,7 +31,7 @@ class FontHelper
 		@unicodes.each_with_index do |unicode, index|
 			unicodeSplitted = unicode.split(" ")
 			if !self.isValidUnicodeCharacter(unicodeSplitted[0]) then next end
-			if unicodeSplitted.length == 3
+			if unicodeSplitted.length > 1
 				unicodeValue = unicodeSplitted[0]
 				unicodeValue = unicodeValue.sub('uni', 'u')
 				unicodesStringArray += '@"\\' + unicodeValue + '"'
@@ -60,11 +61,9 @@ class FontHelper
 		@unicodes.each_with_index do |unicode, index|
 			unicodeSplitted = unicode.split(" ")
 			if !self.isValidUnicodeCharacter(unicodeSplitted[0]) then next end
-			if unicodeSplitted.length == 3
-				unicodeName = unicodeSplitted[2]
-				unicodesString += '    ' + @fontName + '_' + unicodeName
-				if index < @unicodes.length-1 then unicodesString += ',' + "\n" end
-			end
+			unicodeName = unicodeSplitted[2] ? unicodeSplitted[2] : "" 
+			unicodesString += '    ' + @fontName + '_' + unicodeName
+			if index < @unicodes.length-1 then unicodesString += ',' + "\n" end
 		end
 		return unicodesString
 	end
