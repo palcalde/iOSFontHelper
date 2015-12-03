@@ -92,6 +92,7 @@ class FontHelper
 
 	def isValidUnicodeCharacter(uniChar) 
 		case uniChar
+		when 'uni0001' then return false
 		when 'uni0020' then return false
 		when 'uniFFFF' then return false
 		when 'uniF500' then return false
